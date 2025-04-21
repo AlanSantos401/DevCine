@@ -1,12 +1,15 @@
 import Button from '../../components/Button';
 import Slider from '../../components/slider';
 import api from '../../services/api';
+import { GetImages } from '../../utils/getImages';
 import { Background, Info, Poster, Container, ContainerButtons } from './styles';
 import { useState, useEffect } from 'react';
 
 function Home() {
 	const [movie, setMovie] = useState();
 	const [topMovies, setTopMovies] = useState();
+	const [topSeries, setTopSeries] = useState();
+	const [popularSeries, setPopularSeries] = useState();
 
 
    useEffect( () => {
@@ -17,15 +20,34 @@ function Home() {
 		setMovie(results[7])
 	  }
 
-	  async	function getTopMovies() {
+	async function getTopMovies() {
 		const {data: {results}
 	    } = await api.get('/movie/top_rated')
 	
 		console.log(results)
 		setTopMovies(results)
-	  }
-		getMovies()
-		getTopMovies()
+	}
+
+   async	function getTopSeries() {
+	const {data: {results}
+	} = await api.get('/tv/top_rated')
+
+	 console.log(results)
+	 setTopSeries(results)
+   }
+
+   async	function getPopularSeries() {
+	const {data: {results}
+	} = await api.get('/tv/popular')
+
+	 console.log(results)
+	 setPopularSeries(results)
+   }
+
+	getMovies()
+	getTopMovies()
+	getTopSeries()
+	getPopularSeries()
 
    }, [])
 
@@ -34,7 +56,7 @@ function Home() {
 		<>
 		 {movie && ( 
 		   <Background 
-		     $img={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+		     img={GetImages(movie.backdrop_path)}
 			>
 		<Container>
 			<Info>
@@ -46,12 +68,14 @@ function Home() {
 			</ContainerButtons>
 			</Info>
 			<Poster>
-				<img alt='capa-do-filme' src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}/>
+				<img alt='capa-do-filme' src={GetImages(movie.poster_path)}/>
 			</Poster>
 		</Container>	
 		   </Background>
 		  )}
 		    {topMovies && <Slider info={topMovies} title={'Top Filmes'}/>}
+			{topSeries && <Slider info={topSeries} title={'Top Séries'}/>}
+			{popularSeries && <Slider info={popularSeries} title={'Séries Populares'}/>}
 		</>
 	);
 }

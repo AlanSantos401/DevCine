@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Background = styled.div`
-  background-image: url(${props => props.$img});
+  background-image: url(${props => props.img});
   height: 100vh;
   background-position: center;
   background-size: cover;
@@ -15,7 +15,7 @@ export const Background = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 110%;
     background-color: rgba(0, 0, 0, 0.5);
   }
 `

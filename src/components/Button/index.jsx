@@ -1,12 +1,12 @@
 import { ButtonRed, ButtonWite } from "./styles";
 
-function Button({children, red}) {
+function Button({children, red, ...props }) {
     return (
       <>
       if{ red ? ( 
-        <ButtonRed>{children}</ButtonRed>
+        <ButtonRed {...props}>{children}</ButtonRed>
       ) : (
-        <ButtonWite>{children}</ButtonWite>
+        <ButtonWite {...props}>{children}</ButtonWite>
       )} 
       </>
     )

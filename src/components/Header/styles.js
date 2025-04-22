@@ -1,19 +1,23 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-height: 15%;
-width: 100%;
- z-index: 99;
+ min-height: 100px;
+ height: 9%;
+ width: 100%;
+ z-index: 50;
  position: fixed;
- top: 0;
+ top: 15px;
  display: flex;
  justify-content: space-between;
  padding: 5px;
  align-items: center;
  padding: 10px 50px 0 10px;
+ background-color: ${props => 
+   props.$changeBackground ? '#000' : 'transparent'};
+ transition: 0.6s ease-in-out;
 
  img {
-    width: 25%;
+    width: 23%;
  }
 `
 
@@ -38,7 +42,7 @@ export const Li = styled.li`
  &::after {
    content: '';
    height: 3px;
-   width: ${props => props.isActive ? '100%' : 0};
+   width: ${props => props.$isActive ? '100%' : 0};
    background-color: #189b20;
    position: absolute;
    bottom: -10px;

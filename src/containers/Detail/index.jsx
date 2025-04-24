@@ -53,7 +53,17 @@ function Detail() {
               </Info>
             </Container>
             <ContainerMovies>
-                
+                {movieVideos && movieVideos.map((video) => (
+                  <div key={video.id}>
+                    <h4>{video.name}</h4>
+                    <iframe
+                     src={`https://www.youtube.com/embed/${video.key}`}
+                     title="Yutube Video Player"
+                     height="500px"
+                     width="100%"
+                    ></iframe>
+                  </div>
+                ))}
             </ContainerMovies>
             {movieSimilar && (
               <Slider info={movieSimilar} title={'Filmes Similares'} />

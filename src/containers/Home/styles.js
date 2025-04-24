@@ -1,4 +1,20 @@
-import styled from "styled-components";
+import styled, { keyframes} from "styled-components";
+
+const scale = keyframes`
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+`
+
+export const Pai = styled.div`
+overflow: visible;
+ .swiper-wrapper {
+ overflow: visible;
+ }
+`
 
 export const Background = styled.div`
   background-image: url(${props => props.img});
@@ -17,6 +33,16 @@ export const Background = styled.div`
     width: 100%;
     height: 110%;
     background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background-image: linear-gradient(to top, #0f0f0f, rgba(0, 0, 0, 0));
   }
 `
 export const Container = styled.div`
@@ -50,6 +76,8 @@ export const Poster = styled.div`
  img {
     width: 400px;
     border-radius: 30px;
+    box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+    animation: ${scale} 0.5s linear;
  }
 `
 export const ContainerButtons = styled.div`

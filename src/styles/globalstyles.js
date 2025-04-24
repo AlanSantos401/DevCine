@@ -13,6 +13,7 @@ export default createGlobalStyle`
 
 body {
     background: #000;
+    overflow-x: hidden;
 }
 
 `

@@ -1,10 +1,11 @@
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
-import Slider from '../../components/slider';
-import api from '../../services/api';
+import Slider from '../../components/Slider';
+import { getMovies, getPopularSeries, getTopMovies, getTopSeries } from '../../services/getData';
 import { GetImages } from '../../utils/getImages';
-import { Background, Info, Poster, Container, ContainerButtons } from './styles';
+import { Pai, Background, Info, Poster, Container, ContainerButtons } from './styles';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
 	const [showModal, setShowModal] = useState();
@@ -12,50 +13,31 @@ function Home() {
 	const [topMovies, setTopMovies] = useState();
 	const [topSeries, setTopSeries] = useState();
 	const [popularSeries, setPopularSeries] = useState();
+	const navigate = useNavigate();
 
 
    useEffect( () => {
-	async	function getMovies() {
-		const {data: {results}
-	    } = await api.get('/movie/popular')
-	
-		setMovie(results[7])
-	  }
-
-	async function getTopMovies() {
-		const {data: {results}
-	    } = await api.get('/movie/top_rated')
-	
-		console.log(results)
-		setTopMovies(results)
-	}
-
-   async	function getTopSeries() {
-	const {data: {results}
-	} = await api.get('/tv/top_rated')
-
-	 console.log(results)
-	 setTopSeries(results)
-   }
-
-   async	function getPopularSeries() {
-	const {data: {results}
-	} = await api.get('/tv/popular')
-
-	 console.log(results)
-	 setPopularSeries(results)
-   }
-
-	getMovies()
-	getTopMovies()
-	getTopSeries()
-	getPopularSeries()
-
+	async function getAllData() {
+		Promise.all([
+			getMovies(),
+			getTopMovies(),
+			getTopSeries(),
+			getPopularSeries()
+		])
+		 .then( ([movie, topMovies, topSeries, popularSeries]) => {
+			setMovie (movie)
+		    setTopMovies(topMovies)
+		    setTopSeries(topSeries)
+		    setPopularSeries(popularSeries)
+		 })
+		 .catch( error => console.error(error))
+	    }
+	  getAllData()
    }, [])
 
 
 	return (
-		<>
+		<Pai>
 		 {movie && ( 
 		   <Background img={GetImages(movie.backdrop_path)}>
            {showModal && <Modal movieId={movie.id} setShowModal={setShowModal}/>}
@@ -64,8 +46,12 @@ function Home() {
 			<h1>{movie.title}</h1>
 			<p>{movie.overview}</p>
 			<ContainerButtons>
-				<Button red>Assista Agora</Button>
-				<Button onClick={() => setShowModal(true)}>Assista o Trailer</Button>
+				<Button red onClick={() => navigate(`/detalhe/${movie.id}`)}>
+					Assista Agora
+				</Button>
+				<Button onClick={() => setShowModal(true)}>
+					Assista o Trailer
+				</Button>
 			</ContainerButtons>
 			</Info>
 			<Poster>
@@ -77,7 +63,7 @@ function Home() {
 		    {topMovies && <Slider info={topMovies} title={'Top Filmes'}/>}
 			{topSeries && <Slider info={topSeries} title={'Top Séries'}/>}
 			{popularSeries && <Slider info={popularSeries} title={'Séries Populares'}/>}
-		</>
+		</Pai>
 	);
 }
 

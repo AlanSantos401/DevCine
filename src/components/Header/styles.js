@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 export const Container = styled.div`
  min-height: 100px;
- height: 9%;
+ height: 12%;
  width: 100%;
  z-index: 50;
  position: fixed;
- top: 15px;
+ top: 0px;
  display: flex;
  justify-content: space-between;
  padding: 5px;
@@ -17,7 +17,7 @@ export const Container = styled.div`
  transition: 0.6s ease-in-out;
 
  img {
-    width: 23%;
+    width: 21%;
  }
 `
 

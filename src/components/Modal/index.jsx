@@ -9,7 +9,6 @@ function Modal({ movieId, setShowModal }) {
         async	function getMovies() {
            setMovie(await getMovieVideos(movieId))
           }
-
           getMovies()
    }, [])
 
@@ -19,7 +18,7 @@ function Modal({ movieId, setShowModal }) {
             <Container>
              <iframe
               src={`https://www.youtube.com/embed/${movie.key}`}
-              title="Yutube Video Player"
+              title="Youtube Video Player"
               height="500px"
               width="100%"
              >   

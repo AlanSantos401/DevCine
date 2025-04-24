@@ -52,7 +52,7 @@ export const Cover = styled.div`
   display: flex;
   align-items: flex-start;
   height: 100%;
-  z-index: 99;
+  z-index: 20;
 
   img {
     width: 450px;
@@ -65,7 +65,7 @@ export const Cover = styled.div`
 export const Info = styled.div`
  padding: 20px;
  width: 50%;
- z-index: 99;
+ z-index: 20;
  display: flex;
  align-items: flex-start;
  flex-direction: column;

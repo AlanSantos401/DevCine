@@ -31,7 +31,7 @@ export async function getPopularSeries() {
 export async function getMovieVideos(movieId) {
     const {data: {results}
     } = await api.get(`/movie/${movieId}/videos`)
-
+    
     return results[0]
 }
 

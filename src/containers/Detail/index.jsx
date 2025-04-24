@@ -25,7 +25,7 @@ function Detail() {
       ])
        .then( ([movie, videos, credits, similar]) => {
         setMovie(movie)
-        setMovieVideos(videos)
+        setMovieVideos([videos])
         setMovieCredits(credits)
         setMovieSimilar(similar)
        })

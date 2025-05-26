@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export const  Background = styled.div`
-  background-image: url(${ props => props.img} );
+export const Background = styled.div`
+  background-image: url(${(props) => props.img} );
   height: 100vh;
   background-position: center;
   background-size: cover;
@@ -18,7 +18,7 @@ export const  Background = styled.div`
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
   }
-`
+`;
 
 export const Container = styled.div`
   display: flex;
@@ -26,7 +26,7 @@ export const Container = styled.div`
   align-items: center;
   height: 100%;
   max-width: 1500px;
-`
+`;
 
 export const Info = styled.div`
 z-index: 2;
@@ -46,7 +46,7 @@ width: 50%;
     margin-top: 30px;
     margin-bottom: 20px;
   }
-`
+`;
 export const Poster = styled.div`
  z-index: 3;
 
@@ -55,9 +55,9 @@ export const Poster = styled.div`
   border-radius: 30px;
   
  }
-`
+`;
 export const ContainerButtons = styled.div`
  display: flex;
  gap: 20px;
  margin-top: 30px;
-`
+`;

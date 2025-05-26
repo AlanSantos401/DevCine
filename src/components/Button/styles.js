@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-const buttonStyles =css`
+const buttonStyles = css`
   border: 3px solid #ffffff;
   background: transparent;
   color: #ffffff;
@@ -14,11 +14,11 @@ const buttonStyles =css`
     color: #ff0000;
     background: #ffffff;
  }
-`
+`;
 
 export const ButtonWhite = styled.button`
   ${buttonStyles}
-`
+`;
 export const ButtonRed = styled.button`
   ${buttonStyles}
 
@@ -31,4 +31,4 @@ export const ButtonRed = styled.button`
     background: #ff0000;
     color: #ffffff;
   }
-`
+`;

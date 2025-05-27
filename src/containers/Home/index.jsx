@@ -8,9 +8,12 @@ import {
 	Info,
 	Poster,
 } from "./styles";
+import Slider from "../../components/Slider";
+import { getImages } from "../../utils/getImages";
 
 function Home() {
 	const [movie, setmovie] = useState();
+	const [topMovies, setTopMovies] = useState();
 
 	useEffect(() => {
 		async function getMovies() {
@@ -18,17 +21,28 @@ function Home() {
 				data: { results },
 			} = await api.get("/movie/popular");
 
-			setmovie(results[5]);
+			setmovie(results[3]);
+		}
+
+		async function getTopMovies() {
+			const {
+				data: { results },
+			} = await api.get("/movie/top_rated");
+
+			console.log(results)
+			setTopMovies(results);
 		}
 
 		getMovies();
+		getTopMovies();
 	}, []);
 
+	
 	return (
 		<>
 			{movie && (
 				<Background
-					img={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+					img={getImages(movie.backdrop_path)}
 				>
 					<Container>
 						<Info>
@@ -42,12 +56,13 @@ function Home() {
 						<Poster>
 							<img
 								alt="capa-do-filme"
-								src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+								src={getImages(movie.poster_path)}
 							/>
 						</Poster>
 					</Container>
 				</Background>
 			)}
+			{topMovies && <Slider info={topMovies} title={"Top Filmes"}/>}
 		</>
 	);
 }

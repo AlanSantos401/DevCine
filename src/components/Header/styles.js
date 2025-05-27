@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  min-height: 100px;
   width: 100%;
-  height: 120px;
+  height: 100px;
   z-index: 99;
   position: fixed;
   top: 0;
@@ -10,6 +11,8 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px 40px 0px 5px;
+  background-color: ${props => props.changeBackground ? '#000' : 'transparent'};
+  transition: background-color 0.6s ease-in-out;
 
   img {
    width: 35%;
@@ -41,9 +44,9 @@ export const Li = styled.li`
     background-color: #189b20;
     position: absolute;
     bottom: -10px;
+    transition: width 0.5s ease-in-out;
     left: 50%;
     transform: translateX(-50%);
-    transition: width 0.5s ease-in-out;
    }
 
    &:hover::after{

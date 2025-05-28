@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
 import Slider from "../../components/Slider";
-import api from "../../services/api";
+import {
+	getMovies,
+	getTopAnimes,
+	getTopMovies,
+	getTopSeries,
+} from "../../services/getData";
 import { getImages } from "../../utils/getImages";
 import {
 	Background,
@@ -18,57 +24,26 @@ function Home() {
 	const [topMovies, setTopMovies] = useState();
 	const [topSeries, setTopSeries] = useState();
 	const [topAnimes, setTopAnimes] = useState();
+	const navigate = useNavigate();
 
 	useEffect(() => {
-		async function getMovies() {
-			const {
-				data: { results },
-			} = await api.get("/movie/popular");
-
-			setmovie(results[3]);
+		async function getAllData() {
+			Promise.all(([
+				getMovies(), 
+				getTopMovies(), 
+				getTopSeries(), 
+				getTopAnimes()
+			]))
+				.then(([movie, topMovies, topSeries, topAnimes]) => {
+					setmovie(movie);
+					setTopMovies(topMovies);
+					setTopSeries(topSeries);
+					setTopAnimes(topAnimes);
+				})
+				.catch((error) => console.error(error));
 		}
 
-		async function getTopMovies() {
-			const {
-				data: { results },
-			} = await api.get("/movie/top_rated");
-
-			console.log(results);
-			setTopMovies(results);
-		}
-
-		async function getTopSeries() {
-			const {
-				data: { results },
-			} = await api.get("/tv/top_rated");
-
-			console.log(results);
-			setTopSeries(results);
-		}
-
-		async function getTopAnimes() {
-			try {
-				const {
-					data: { results },
-				} = await api.get("/discover/tv", {
-					params: {
-						with_genres: 16,
-						with_original_language: "ja",
-						sort_by: "popularity.desc",
-					},
-				});
-
-				console.log(results);
-				setTopAnimes(results);
-			} catch (error) {
-				console.error("Erro ao buscar animes:", error);
-			}
-		}
-
-		getMovies();
-		getTopMovies();
-		getTopSeries();
-		getTopAnimes();
+		getAllData();
 	}, []);
 
 	return (
@@ -83,7 +58,9 @@ function Home() {
 							<h1>{movie.title}</h1>
 							<p>{movie.overview}</p>
 							<ContainerButtons>
-								<Button red>Assista Agora</Button>
+								<Button red onClick={() => navigate(`/detalhe/${movie.id}`)}>
+									Assista Agora
+								</Button>
 								<Button onClick={() => setShowModal(true)}>
 									Assista o Trailer
 								</Button>

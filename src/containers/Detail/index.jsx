@@ -1,64 +1,87 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Credits from "../../components/Credits";
+import SpanGenres from "../../components/SpanGenres";
 import {
-	getMovieById,
-	getMovieCredits,
-	getMovieSimilar,
-	getMovieVideos,
+  getMovieById,
+  getMovieCredits,
+  getMovieSimilar,
+  getMovieVideos,
 } from "../../services/getData";
 import { getImages } from "../../utils/getImages";
-import { Background, Container, Cover, Info } from "./styles";
+import { Background, Container, ContainerMovies, Cover, Info } from "./styles";
+import Slider from "../../components/Slider";
 
 function Detail() {
-	const { id } = useParams();
-	const [movie, setMovie] = useState();
-	const [movieVideos, setMovieVideos] = useState();
-	const [MovieCredits, setMovieCredits] = useState();
-	const [movieSimilar, setMovieSimilar] = useState();
+  const { id } = useParams();
 
-	useEffect(() => {
-		async function getAllData() {
-			Promise.all([
-				getMovieById(id),
-				getMovieVideos(id),
-				getMovieCredits(id),
-				getMovieSimilar(id),
-			])
-				.then(([movie, videos, credits, similar]) => {
-					console.log({ movie, videos, similar, credits });
-					setMovie(movie);
-					setMovieVideos(videos);
-					setMovieCredits(credits);
-					setMovieSimilar(similar);
-				})
-				.catch((error) => console.error(error));
-		}
+  const [movie, setMovie] = useState();
+  const [movieVideo, setMovieVideo] = useState(null); // só um vídeo
+  const [MovieCredits, setMovieCredits] = useState();
+  const [movieSimilar, setMovieSimilar] = useState();
 
-		getAllData();
-	}, []);
+  useEffect(() => {
+    async function getAllData() {
+      try {
+        const [movie, video, credits, similar] = await Promise.all([
+          getMovieById(id),
+          getMovieVideos(id), // retorna apenas o primeiro vídeo (objeto)
+          getMovieCredits(id),
+          getMovieSimilar(id),
+        ]);
 
-	return (
-		<>
-			{movie && (
-				<>
-					<Background image={getImages(movie.backdrop_path)} />
-					<Container>
-						<Cover>
-							<img src={getImages(movie.poster_path)} alt="image-poster" />
-						</Cover>
-						<Info>
-							<h2>{movie.title}</h2>
-							<di>Generos</di>
-							<p>{movie.overview}</p>
-							<div>
-								Credits
-							</div>
-						</Info>
-					</Container>
-				</>
-			)}
-		</>
-	);
+        console.log({ movie, video, similar, credits });
+
+        setMovie(movie);
+        setMovieVideo(video); // objeto ou null
+        setMovieCredits(credits);
+        setMovieSimilar(similar);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    getAllData();
+  }, [id]);
+
+  return (
+    <>
+      {movie && (
+        <>
+          <Background image={getImages(movie.backdrop_path)} />
+          <Container>
+            <Cover>
+              <img src={getImages(movie.poster_path)} alt="image-poster" />
+            </Cover>
+            <Info>
+              <h2>{movie.title}</h2>
+              <SpanGenres genres={movie.genres} />
+              <p>{movie.overview}</p>
+              <div>
+                <Credits credits={MovieCredits} />
+              </div>
+            </Info>
+          </Container>
+
+          <ContainerMovies>
+            {movieVideo && (
+              <div key={movieVideo.id}>
+                <h4>{movieVideo.name}</h4>
+                <iframe
+                  src={`https://www.youtube.com/embed/${movieVideo.key}`}
+                  title={movieVideo.name}
+                  height="500px"
+                  width="100%"
+                  allowFullScreen
+                />
+              </div>
+            )}
+          </ContainerMovies>
+		  {movieSimilar && <Slider info={movieSimilar} title={"Filmes Similares"} />}
+        </>
+      )}
+    </>
+  );
 }
 
 export default Detail;

@@ -14,6 +14,7 @@ export const Background = styled.div`
   justify-content: center;
 
  button {
+  
   position: absolute;
   top: 12%;
   left: 50%;

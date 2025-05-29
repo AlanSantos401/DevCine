@@ -16,7 +16,7 @@ function Detail() {
   const { id } = useParams();
 
   const [movie, setMovie] = useState();
-  const [movieVideo, setMovieVideo] = useState(null); // só um vídeo
+  const [movieVideo, setMovieVideo] = useState(null); 
   const [MovieCredits, setMovieCredits] = useState();
   const [movieSimilar, setMovieSimilar] = useState();
 
@@ -25,7 +25,7 @@ function Detail() {
       try {
         const [movie, video, credits, similar] = await Promise.all([
           getMovieById(id),
-          getMovieVideos(id), // retorna apenas o primeiro vídeo (objeto)
+          getMovieVideos(id), 
           getMovieCredits(id),
           getMovieSimilar(id),
         ]);
@@ -33,7 +33,7 @@ function Detail() {
         console.log({ movie, video, similar, credits });
 
         setMovie(movie);
-        setMovieVideo(video); // objeto ou null
+        setMovieVideo(video); 
         setMovieCredits(credits);
         setMovieSimilar(similar);
       } catch (error) {

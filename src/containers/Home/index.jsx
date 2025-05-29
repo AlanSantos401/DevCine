@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
-import Modal from "../../components/Modal";
+import ModalMovies from "../../components/ModalMovies";
 import Slider from "../../components/Slider";
 import {
 	getMovies,
@@ -28,12 +28,12 @@ function Home() {
 
 	useEffect(() => {
 		async function getAllData() {
-			Promise.all(([
-				getMovies(), 
-				getTopMovies(), 
-				getTopSeries(), 
-				getTopAnimes()
-			]))
+			Promise.all([
+				getMovies(0),
+				getTopMovies(),
+				getTopSeries(),
+				getTopAnimes(),
+			])
 				.then(([movie, topMovies, topSeries, topAnimes]) => {
 					setmovie(movie);
 					setTopMovies(topMovies);
@@ -50,15 +50,20 @@ function Home() {
 		<>
 			{movie && (
 				<Background img={getImages(movie.backdrop_path)}>
-					{showModal && (
-						<Modal movieId={movie.id} setShowModal={setShowModal} />
+					{showModal && movie?.id && (
+						<ModalMovies
+							movieId={movie.id}
+							type="movie"
+							setShowModal={setShowModal}
+						/>
 					)}
+
 					<Container>
 						<Info>
 							<h1>{movie.title}</h1>
 							<p>{movie.overview}</p>
 							<ContainerButtons>
-								<Button red onClick={() => navigate(`/detalhe/${movie.id}`)}>
+								<Button red onClick={() => navigate(`/detalhe/movie/${movie.id}`)}>
 									Assista Agora
 								</Button>
 								<Button onClick={() => setShowModal(true)}>

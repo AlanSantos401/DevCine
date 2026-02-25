@@ -18,12 +18,36 @@ export const Container = styled.div`
    width: 35%;
    cursor: pointer;
   }
+
+  @media (max-width: 1020px) {
+     padding: 10px 20px;
+
+     img {
+      width: 220px;
+    }
+  }
+
+  @media (max-width: 768px) {
+      padding: 10px;
+    
+    img {
+      width: 130px;
+    }
+  }
+
 `;
 
 export const Menu = styled.ul`
   display: flex;
   list-style: none;
   gap: 50px;
+
+   @media (max-width: 768px) {
+   gap: 15px;
+   display: flex;
+   align-items: center;
+   text-align: center;
+  }
 `;
 export const Li = styled.li`
  
@@ -52,4 +76,9 @@ export const Li = styled.li`
    &:hover::after{
     width: 100%;
    }
+
+   @media (max-width: 768px) {
+   text-align: center;
+   font-size: 20px;
+  }
 `;

@@ -15,7 +15,7 @@ export const Container = styled.div`
   transition: background-color 0.6s ease-in-out;
 
   img {
-   width: 35%;
+   width: 370px;
    cursor: pointer;
   }
 
@@ -28,7 +28,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: 768px) {
-      padding: 10px;
+      padding: 5px 10px;
     
     img {
       width: 130px;

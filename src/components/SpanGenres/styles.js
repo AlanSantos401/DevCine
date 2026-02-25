@@ -17,4 +17,19 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
  }
+
+   @media (max-width: 1024px) {
+    span:nth-child(n + 5) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+   span {
+      font-size: 10px;
+   }
+    span:nth-child(n + 3) {
+      display: none;
+    }
+  }
 `

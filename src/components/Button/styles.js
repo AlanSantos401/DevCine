@@ -14,6 +14,11 @@ const buttonStyles = css`
     color: #ff0000;
     background: #ffffff;
  }
+
+   @media (max-width: 1024px) {
+   font-size: 17px;
+   white-space: nowrap;
+  }
 `;
 
 export const ButtonWhite = styled.button`

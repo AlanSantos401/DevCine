@@ -60,6 +60,21 @@ export const Cover = styled.div`
     box-shadow: rgb( 100 100 111 / 20%) 0px 7px 29px 0px;
     animation: ${scale} 0.5s linear;
  }
+
+   @media (max-width: 1020px) {
+     padding: 10px;
+
+     img {
+      width: 300px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    
+    img {
+      width: 170px;
+    }
+  }
 `;
 
 export const Info = styled.div`
@@ -82,6 +97,22 @@ export const Info = styled.div`
     margin-top: 20px;
     margin-bottom: 30px;
  }
+
+  @media (max-width: 1020px) {
+     h2 {
+      font-size: 37px;
+     }
+  }
+
+  @media (max-width: 768px) {
+     h2 {
+      font-size: 30px;
+     }
+
+     p {
+      display: none;
+     }
+  }
 `
 
 export const ContainerMovies = styled.div`

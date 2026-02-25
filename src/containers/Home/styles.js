@@ -65,6 +65,23 @@ width: 50%;
     margin-top: 30px;
     margin-bottom: 20px;
   }
+
+  @media (max-width: 1024px) {
+    h1 {
+      font-size: 50px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    h1 {
+      font-size: 40px;
+    }
+  }
 `;
 
 export const Poster = styled.div`
@@ -76,10 +93,23 @@ export const Poster = styled.div`
   box-shadow: rgb( 100 100 111 / 20%) 0px 7px 29px 0px;
     animation: ${scale} 0.5s linear;
  }
+
+  @media (max-width: 1024px) {
+   img {
+    width: 330px;
+   }
+  }
+
+  @media (max-width: 768px) {
+   img {
+    display: none;
+   }
+  }
 `;
 
 export const ContainerButtons = styled.div`
  display: flex;
  gap: 20px;
  margin-top: 30px;
+
 `;

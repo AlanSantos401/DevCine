@@ -16,4 +16,20 @@ export const Container = styled.div`
     color: #ffffff;
     margin-top: 15px;
   }
+
+  @media (max-width: 1024px) {
+
+    img {
+      width: 190px;
+      height: 300px;
+    }
+  }
+
+   @media (max-width: 768px) {
+
+    img {
+      width: 190px;
+      height: 280px;
+    }
+  }
 `

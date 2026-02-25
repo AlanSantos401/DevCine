@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import ModalMovies from "../../components/ModalMovies";
 import Slider from "../../components/Slider";
+
 import {
 	getMovies,
 	getTopAnimes,

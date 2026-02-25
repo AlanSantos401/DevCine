@@ -5,6 +5,7 @@ import { Container } from "./styles";
 
 function Slider({ info, title }) {
   const navigate = useNavigate();
+  
 
   function handleClick(item) {
     let type = "movie"; // default

@@ -22,12 +22,21 @@ function Slider({ info, title }) {
   return (
     <Container>
       <h2>{title}</h2>
-      <Swiper
-        grabCursor
-        spaceBetween={10}
-        slidesPerView={"auto"}
-        className="swiper"
-      >
+     <Swiper
+  slidesPerView={4}
+  spaceBetween={20}
+  breakpoints={{
+    0: {
+      slidesPerView: 2, // celulares
+    },
+    768: {
+      slidesPerView: 3, // tablet
+    },
+    1024: {
+      slidesPerView: 4, // desktop
+    },
+  }}
+>
         {info.map((item) => (
           <SwiperSlide key={item.id} onClick={() => handleClick(item)}>
             <Card item={item} />

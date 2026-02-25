@@ -28,8 +28,12 @@ export const Container = styled.div`
    @media (max-width: 768px) {
   overflow-x: hidden;
     img {
-      width: 190px;
-      height: 280px;
+      width: 167px;
+      height: 270px;
+    }
+
+    h3 {
+      font-size: 15px;
     }
   }
 `

@@ -31,7 +31,7 @@ export const Container = styled.div`
       padding: 5px 10px;
     
     img {
-      width: 130px;
+      width: 100px;
     }
   }
 
@@ -79,6 +79,6 @@ export const Li = styled.li`
 
    @media (max-width: 768px) {
    text-align: center;
-   font-size: 20px;
+   font-size: 15px;
   }
 `;
